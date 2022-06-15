@@ -42,40 +42,47 @@ def column_renamer(column_name: str) -> str:
     Returns:
         str: Mapped name for the column
     """
-    if column_name == "COD.": return "codigo"
-    if column_name == "Códigos": return "codigo"
-    if column_name == "CRED": return "creditos"
-    if column_name == "Céditos": return "creditos"
-    if column_name == "Créditos": return "creditos"
-    if column_name == "TURMA": return "turma"
-    if column_name == "Turmas": return "turma"
-    if column_name == "DISCIPLINA": return "disciplina"
-    if column_name == "Disciplinas": return "disciplina"
-    if column_name == "HORÁRIO": return "horario"
-    if column_name == "Horários": return "horario"
-    if column_name == "SALA": return "sala"
-    if column_name == "Sala": return "sala"
-    if column_name == "Salas": return "sala"
-    if column_name == "MOODLE": return "sala"
-    if column_name == "Pres/Híbrid": return "tipo"
-    if column_name == "PROFESSOR": return "docentes"
-    if column_name == "Docentes": return "docentes"
-    if column_name == "Graduação?": return "graduacao"
-    if column_name == "Grad.": return "graduacao"
-    if column_name == "GRADUAÇÃO": return "graduacao"
-    raise KeyError(f"New column name ({column_name}): Please update `column_renamer` function.")
+    try:
+        mapper = {
+            "COD.": "codigo",
+            "Códigos": "codigo",
+            "CRED": "creditos",
+            "Céditos": "creditos",
+            "Créditos": "creditos",
+            "TURMA": "turma",
+            "Turmas": "turma",
+            "DISCIPLINA": "disciplina",
+            "Disciplinas": "disciplina",
+            "HORÁRIO": "horario",
+            "Horários": "horario",
+            "SALA": "sala",
+            "Sala": "sala",
+            "Salas": "sala",
+            "MOODLE": "sala",
+            "Pres/Híbrid": "tipo",
+            "PROFESSOR": "docentes",
+            "Docentes": "docentes",
+            "Graduação?": "graduacao",
+            "Grad.": "graduacao",
+            "GRADUAÇÃO": "graduacao"
+        }
+        return mapper[column_name]
+    except KeyError as error:
+        raise KeyError(
+            f"New column name ({column_name}): Please update `column_renamer` function."
+        ) from error
 
 ## Initialize DataFrame
 df = pd.DataFrame()
 
 ## Loop through `semesters_list` extracting page data
 for semester, soup in semesters_list:
-    table_html = str(soup.find(
+    TABLE_HTML = str(soup.find(
         "table"
     ))
 
     table_df = pd.read_html(
-        table_html,
+        TABLE_HTML,
         header=0,
         decimal=",",
         thousands="."
