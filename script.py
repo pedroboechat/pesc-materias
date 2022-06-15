@@ -1,3 +1,5 @@
+"""Scraper for PESC courses page"""
+
 # Imports
 ## Standard libraries
 import csv
@@ -93,7 +95,7 @@ for semester, soup in semesters_list:
         "",
         semester
     )
-    
+
     df = pd.concat(
         [df, table_df]
     )
