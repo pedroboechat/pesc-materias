@@ -100,7 +100,7 @@ for semester, soup in semesters_list:
 
 ## Data treatment
 ### 1) `-----` to `NaN`
-df = df.replace(re.compile(r"-+"), float("NaN"))
+df = df.replace(re.compile(r"^-+$"), float("NaN"))
 
 ### 2) Fix typo and convert dtype for `creditos` column
 df["creditos"] = df["creditos"].replace("vc 3,0", 3.0).astype(float)
