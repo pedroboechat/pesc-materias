@@ -60,7 +60,7 @@ def column_renamer(column_name: str) -> str:
             "SALA": "sala",
             "Sala": "sala",
             "Salas": "sala",
-            "MOODLE": "sala",
+            "MOODLE": "moodle",
             "Pres/Híbrid": "tipo",
             "PROFESSOR": "docentes",
             "Docentes": "docentes",
